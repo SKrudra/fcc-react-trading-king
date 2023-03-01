@@ -16,7 +16,7 @@ const StockList = () => {
   };
 
   useEffect(() => {
-    // let isMounted = true;
+    let isMounted = true;
     const fetchData = async () => {
       let responses = [];
       try {
@@ -31,10 +31,10 @@ const StockList = () => {
         const data = responses.map((response) => {
           return { data: response.data, symbol: response.config.params.symbol };
         });
-        // if (isMounted) {
+        if (isMounted) {
           setStock(data);
           localStorage.setItem('stock', JSON.stringify(data));
-        // }
+        }
         console.log(data);
       } catch (error) {
         setStock([]);
@@ -42,7 +42,7 @@ const StockList = () => {
       }
     };
     fetchData();
-    // return () => (isMounted = false);
+    return () => (isMounted = false);
   }, []);
 
   // {"c":146.5041,"d":-0.9059,"dp":-0.6145,"h":147.2285,"l":145.41,"o":146.83,"pc":147.41,"t":1677693289}
